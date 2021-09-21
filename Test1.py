@@ -1,0 +1,2 @@
+a = "navada
+print(a)

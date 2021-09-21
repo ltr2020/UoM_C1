@@ -44,17 +44,30 @@ frame = pd.DataFrame(data, columns=["year", "state", "pop", "debt"]) #arrange co
 value = pd.Series ([-1.5, -2, -3], index = [0, 3, 4]) #assign list, array, series to DataFrame
 frame["debt"] = value
 frame['eastern'] = frame.state == 'Ohio' #create a new column
-print(frame)
+print(frame.loc[:, ["year", "state", "pop", "debt"]])
 del frame["eastern"]
 print("")
-
-record1 = pd.Series(["Ohio"[3], "Nevada"[3]])
-record2 = pd.Series([range(2000,2004)])
-record3 = pd.Series([1.5, 1.7, 3.6, 2.4, 2.9, 3.2])
-frame = pd.DataFrame([record1, record2, record3])
-print(frame)
 
 print(frame.loc[3]) #retrieve row
 print(frame["state"])
 print("")
+
+#or seperately but slower
+record1 = pd.Series({"state": "Ohio",
+                     "year": 2000,
+                     "pop": 1.5})
+record2 = pd.Series({"state": "Ohio",
+                     "year": 2001,
+                     "pop": 1.7})
+record3 = pd.Series({"state": "Ohio",
+                     "year": 2002,
+                     "pop": 3.6})
+frame1 = pd.DataFrame([record1, record2, record3])
+print(frame.T)  #transpose
+print("")
+
+#Drop function or use del
+print(frame.drop("state", inplace=False, axis=1))    #drop row and column, inplace=True, axis=0
+del frame["state"]
+print(frame)
 
