@@ -16,7 +16,7 @@ b = np.zeros((2,3))
 print("\n",b)
 c = np.ones((3,3))
 print("\n",c)
-d = np.random.rand(5,2) #just single bracket
+d = np.random.rand(5,2) #just single bracket or np.random.randint
 print("\n",d)
 e = np.arange(2,50,2).reshape(6,4) #3rd arg is interval b/w no
 print("\n",e)
