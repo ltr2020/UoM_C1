@@ -1,5 +1,8 @@
-import pandas as pd
+import re
 import numpy as np
+import pandas as pd
+pd.set_option('display.width', 400)
+pd.set_option('display.max_columns', 10)
 
 #Series
 price = pd.Series([1000,2000,3000]) #default index 0,1,2
@@ -72,5 +75,22 @@ del frame["state"]
 print(frame)
 print("")
 
-df = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM\Doc\Admission_Predict.csv")
+df = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM\Doc\Admission_Predict.csv", index_col=1)
 print(df.head())
+print("")
+
+#using dict to change column name
+df = df.rename(mapper=str.strip, axis="columns")
+#str.strip() to strip space
+df_new = df.rename(columns={"LOR":"Letter of Recom",
+                            "SOP":"Statement of Purpose"})
+print(df_new.columns)
+
+#filter and drop NaN values (boolean mask)
+criteria = df[df["Chance of Admit"]>0.7]    #include .where() & .dropna
+print(criteria)
+#or
+criteria = df["Chance of Admit"].gt(0.7).lt(0.9)    #0.7<x<0.9
+print(df.where(criteria).dropna().head())
+
+

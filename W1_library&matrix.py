@@ -40,7 +40,7 @@ print(a[a>4])
 
 #PIL image processing
 from PIL import Image   #Pycham somehow can't install PIL
-im = Image.open(r'C:\Users\lokti\PycharmProjects\UoM_C1\Doc\Messi.jpg')
+im = Image.open(r'C:\Users\user\PycharmProjects\UoM_C1\Doc\Messi.jpg')
 im.show()
 print(im.format, im.mode)
 import numpy as np
