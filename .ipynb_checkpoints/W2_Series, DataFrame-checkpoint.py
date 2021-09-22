@@ -70,6 +70,4 @@ print("")
 print(frame.drop("state", inplace=False, axis=1))    #drop row and column, inplace=True, axis=0
 del frame["state"]
 print(frame)
-print("")
-
 
