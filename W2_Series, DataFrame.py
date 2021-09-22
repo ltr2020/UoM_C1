@@ -72,4 +72,5 @@ del frame["state"]
 print(frame)
 print("")
 
-
+df = pd.read_csv(C:\Users\user\PycharmProjects\UoM\Doc\Admission_Predict.csv)
+print(df.head())

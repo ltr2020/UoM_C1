@@ -6,8 +6,7 @@ def names():
     pattern = "[A-Z][a-z]*"
     return re.findall(pattern, simple_string)
 print(names())
-assert len(name
-s()) == 4, "There are four names in the simple_string"
+assert len(names()) == 4, "There are four names in the simple_string"
 #the boolean expression that checks if the statement is True or Falss
 #If the statement is true then it does nothing and continues the execution
 #but if the statement is False then it throws an error
