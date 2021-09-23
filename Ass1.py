@@ -7,9 +7,7 @@ def names():
     return re.findall(pattern, simple_string)
 print(names())
 assert len(names()) == 4, "There are four names in the simple_string"
-#the boolean expression that checks if the statement is True or Falss
-#If the statement is true then it does nothing and continues the execution
-#but if the statement is False then it throws an error
+#assert function, if the statement is False then it throws an error
 
 
 #Create a regex to generate a list of just those students who received a B in the course
