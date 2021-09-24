@@ -4,7 +4,7 @@ import pandas as pd
 pd.set_option('display.width', 400)
 pd.set_option('display.max_columns', 10)
 
-#Series
+
 print("One")
 price = pd.Series([1000,2000,3000]) #default index 0,1,2
 price = pd.Series([1000,2000,3000], index=["S10","S11","S12"]) #change index
@@ -27,11 +27,14 @@ print(price[2]) #attribute so use index operator, retrieve value by index
 print(price.loc["S20"]) #or retrieve value by key
 print(price[price>1800]) #filter
 print("S12" in price)
-print(pd.isnull(price))
+print("")
+
+
+print("OneB")
+print(price.isnull()) #to check if there's any missing value
 print("")
 
 #for loop but it's not simultaneous
-print("OneB")
 grades = pd.Series([90, 80, 70, 60])
 total = 0
 for grade in grades:
@@ -78,14 +81,14 @@ print(frame.T)  #transpose
 print("")
 
 #Drop function or use del
-print(frame.drop("state", inplace=False, axis=1))    #drop row and column, inplace=True, axis=0 by default
+print(frame.drop("state", inplace=False, axis=1))    #drop row and column, inplace=True (don't create new object alter original), axis=0 by default
 #or
 del frame["state"]  #and print this
 print("")
 
 print("TwoB")
 df = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\Admission_Predict.csv", index_col=1)
-print(df.head())
+print(df.head())    #default 5
 print("")
 
 #using dict to change column name
@@ -95,12 +98,17 @@ df_new = df.rename(columns={"LOR":"Letter of Recom",
                             "SOP":"Statement of Purpose"})
 print(df_new.columns)
 
-#filter and drop NaN values (boolean mask)
+#filter and missing values (boolean mask)
 criteria = df[df["Chance of Admit"]>0.7]    #include .where() & .dropna
 print(criteria)
 #and
 criteria = df["Chance of Admit"].gt(0.7).lt(0.9)    #0.7<x<0.9
-print(df.where(criteria).dropna().head())
+print(df.where(criteria).dropna().head())   #.dropna() removes entries outside 0.7< x <0.9
+
+
+criteria.fillna(0, inplace=True)    #fill missing value with "0"
+
+print("")
 
 #set a column to be new index
 df.index = df["Research"]
@@ -109,3 +117,23 @@ print(df["Research"].unique()) #unique value in research
 df.filter = df[df["Research"] == 1]
 print(df.filter.head())
 #df.loc[(index1_1, index1_2,...), (index2_1, index2_2,...)]
+
+#Missing Value
+print("TwoC")
+CG = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\class_grades.csv")
+# for large file, without any missing value, add na_filter=False can improve perf
+CG_drop = CG.dropna()    #drop missing values
+CG.fillna(0, inplace=True)
+#modify original dataframe all missing values to 0
+print(CG.head())
+print("")
+
+#Another example
+LOG = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\log.csv")  #no chan個--》missing values
+print(LOG.head(10))
+LOG = LOG.set_index(["time", "user"]) #multi-level indexing
+LOG = LOG.sort_index(reverse = True)  #sort by index
+LOG = LOG.fillna(method = "ffill")  #to fill missing values with previous row entry
+#bfill vice versa
+
+print(LOG.head())
