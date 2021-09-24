@@ -84,7 +84,7 @@ del frame["state"]  #and print this
 print("")
 
 print("TwoB")
-df = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM\Doc\Admission_Predict.csv", index_col=1)
+df = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\Admission_Predict.csv", index_col=1)
 print(df.head())
 print("")
 
@@ -109,7 +109,3 @@ print(df["Research"].unique()) #unique value in research
 df.filter = df[df["Research"] == 1]
 print(df.filter.head())
 #df.loc[(index1_1, index1_2,...), (index2_1, index2_2,...)]
-
-
-
-
