@@ -132,8 +132,32 @@ print("")
 LOG = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\log.csv")  #no chan個--》missing values
 print(LOG.head(10))
 LOG = LOG.set_index(["time", "user"]) #multi-level indexing
-LOG = LOG.sort_index(reverse = True)  #sort by index
+LOG = LOG.sort_index()  #sort by index
 LOG = LOG.fillna(method = "ffill")  #to fill missing values with previous row entry
 #bfill vice versa
-
+LOG = LOG.replace(to_replace = "[\w]*.html$", value="webpage", regex=True)
 print(LOG.head())
+print("")
+
+#Data CLeaning
+print("TwoD")
+USA = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\presidents.csv")
+#method 1
+USA["First Name"] = USA["President"]
+USA["First Name"] = USA["First Name"].replace(to_replace="[ ].*", value="", regex=True)
+del(USA["First Name"])
+#method 2 apply() function apply arbitrary function written to Series (single col) or DF
+def splitname(row):
+    row["First Name"] = row["President"].split(" ")[0]
+    row["Last Name"] = row["President"].split(" ")[-1]
+    return row
+USA = USA.apply(splitname, axis="columns")
+del(USA["First Name"])
+del(USA["Last Name"])
+#method 3 .extract()
+pattern = "(?P<First>^[\w]*)(?:.* )(?P<Last>[\w]*$)"
+print(USA["President"].str.extract(pat = pattern).head())
+name = USA["President"].str.extract(pat = pattern).head()
+USA["First"] = name["First"]
+USA["Last"] = name["Last"]
+print(USA.head())
