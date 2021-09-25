@@ -132,7 +132,7 @@ print("")
 LOG = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\log.csv")  #no chan個--》missing values
 print(LOG.head(10))
 LOG = LOG.set_index(["time", "user"]) #multi-level indexing
-LOG = LOG.sort_index(reverse = True)  #sort by index
+LOG = LOG.sort_index()  #sort by index
 LOG = LOG.fillna(method = "ffill")  #to fill missing values with previous row entry
 #bfill vice versa
 
