@@ -100,9 +100,9 @@ print(df_new.columns)
 
 #filter and missing values (boolean mask)
 criteria = df[df["Chance of Admit"]>0.7]    #include .where() & .dropna
-print(criteria)
+print(criteria.head())
 #and
-criteria = df["Chance of Admit"].gt(0.7).lt(0.9)    #0.7<x<0.9
+criteria = df["Chance of Admit"].gt(0.7) & df["Chance of Admit"].lt(0.9)    #0.7<x<0.9
 print(df.where(criteria).dropna().head())   #.dropna() removes entries outside 0.7< x <0.9
 
 
