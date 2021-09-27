@@ -62,17 +62,18 @@ def chickenpox_by_sex():
 print(chickenpox_by_sex())
 assert len(chickenpox_by_sex())==2, "Return a dictionary with two items, the first for males and the second for females."
 
-
 def corr_chickenpox():
     import scipy.stats as stats
     import numpy as np
     import pandas as pd
 
     df = pd.read_csv(r"assets/NISPUF17.csv", index_col=0)
-    df = df[]
-    corr_chickenpox()
-
-
+    df = df[["HAD_CPOX","P_NUMVRC"]].dropna()
+    df = df[df["HAD_CPOX"]<=2].dropna()
+    corr, pval = stats.pearsonr(df["HAD_CPOX"],df["P_NUMVRC"])
+    return corr
+    raise NotImplementedError()
+assert -1<=corr_chickenpox()<=1, "You must return a float number between -1.0 and 1.0."
 
 
 
