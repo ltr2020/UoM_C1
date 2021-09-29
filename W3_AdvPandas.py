@@ -42,7 +42,7 @@ df2 = (df[df["SUMLEV"]==50]
 print(df2.head())
 print("")
 
-print("TwoB - .aaply ^ lambda to add new columns")
+print("TwoB - .aaply & lambda to add new columns")
 def min_max(row):
     data = row[["POPESTIMATE2010",
                "POPESTIMATE2011",
@@ -64,4 +64,13 @@ row = ["POPESTIMATE2010",
        "POPESTIMATE2014",
        "POPESTIMATE2015"]
 print(df.apply(lambda x: [np.max(x[row]), np.min(x[row])], axis="columns").head())
+print("")
+
+print(df["STNAME"].tolist())
+def Country(x):
+    USA = df["STNAME"].tolist()
+    if x in USA:
+        return "USA"
+df["Country"] = df["STNAME"].apply(lambda x: country(x))
+print(df[["STNAME","Country"]])
 
