@@ -71,6 +71,9 @@ def Country(x):
     USA = df["STNAME"].tolist()
     if x in USA:
         return "USA"
-df["Country"] = df["STNAME"].apply(lambda x: country(x))
+df["Country"] = df["STNAME"].apply(lambda x: Country(x))
 print(df[["STNAME","Country"]])
+print("")
+
+print("TwoC- groupby() to split df into chunks to speed up")
 
