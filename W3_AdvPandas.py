@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+
 pd.set_option('display.width', 400)
 pd.set_option('display.max_columns', 10)
 staff_df = pd.DataFrame({"Name":["Kelly", "Sally", "James"],
@@ -54,7 +55,7 @@ def min_max(row):
     row["MAX"] = np.max(data)
     row ["MIN"] = np.min(data)
     return row
-print(df.apply(min_max, axis="columns").head())
+df.apply(min_max, axis=" ").head()
 print("")
 
 row = ["POPESTIMATE2010",
@@ -75,5 +76,16 @@ df["Country"] = df["STNAME"].apply(lambda x: Country(x))
 print(df[["STNAME","Country"]])
 print("")
 
-print("TwoC- groupby() to split df into chunks to speed up")
+print("TwoC - groupby() to split df into chunks to speed up")
+def method_slow():
+    for state in df["STNAME"].unique():
+        avg = np.average(df[df["STNAME"]==state].dropna()["CENSUS2010POP"])
+        return("Counties in state " + state + " have an avg pop of " + str(avg))
+
+def method_fast():
+    for group, frame in df.groupby("STNAME"):
+        avg = np.average(frame["CENSUS2010POP"])
+        return("Counties in state " + state + " have an avg pop of " + str(avg))
+
+
 
