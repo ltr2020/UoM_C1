@@ -10,18 +10,18 @@ def proportion_of_education():
     pd.set_option('display.width', 400)
     pd.set_option('display.max_columns', 10)
     import numpy as np
-    df = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\NISPUF17.csv", index_col=0)
+    df = pd.read_csv(r"Doc/NISPUF17.csv", index_col=0)
     n = len(df["EDUC1"])
     POE1 = (np.sum(df["EDUC1"] == 1)) / n
     POE2 = (np.sum(df["EDUC1"] == 2)) / n
     POE3 = (np.sum(df["EDUC1"] == 3)) / n
     POE4 = (np.sum(df["EDUC1"] == 4)) / n
     POE = {"less than high school": POE1,
-           "high school": POE2,
-           "more than high school but not college": POE3,
-           "college": POE4}
+              "high school": POE2,
+              "more than high school but not college": POE3,
+              "college": POE4}
     return POE
-    raise NotImplementedError
+    raise NotImplementedError()
 print(proportion_of_education())
 
 assert type(proportion_of_education())==type({}), "You must return a dictionary."
@@ -36,12 +36,11 @@ assert "college" in proportion_of_education().keys(), "You have not returned a d
 # from a healthcare provider. Return a tuple of the average number of influenza vaccines for those children we know received breastmilk as a child and those who know did not.
 # This function should return a tuple in the form (use the correct numbers:
 def average_influenza_doses():
-    # YOUR CODE HERE
     import pandas as pd
     pd.set_option('display.width', 400)
     pd.set_option('display.max_columns', 10)
     import numpy as np
-    df = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\NISPUF17.csv", index_col=0)
+    df = pd.read_csv(r"Doc/NISPUF17.csv", index_col=0)
     df = df.loc[:, ["CBF_01", "P_NUMFLU"]]
     df = df[df["P_NUMFLU"].notna()] #filter out missing values in P_NUMFLU
     n_bf = len(df[df["CBF_01"] == 1])
@@ -60,7 +59,7 @@ assert len(average_influenza_doses())==2, "Return two values in a tuple, the fir
 # This function should return a dictionary in the form of (use the correct numbers)
 def chickenpox_by_sex():
     import pandas as pd
-    df = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\NISPUF17.csv", index_col=0)
+    df = pd.read_csv(r"Doc\NISPUF17.csv", index_col=0)
     df = df.loc[:,["HAD_CPOX", "P_NUMVRC", "SEX"]].dropna()
     criteria1= (df["SEX"]==1) & (df["HAD_CPOX"]==1) & (df["P_NUMVRC"]>=1)
     criteria2= (df["SEX"]==1) & (df["HAD_CPOX"]==2) & (df["P_NUMVRC"]>=1)
@@ -87,12 +86,13 @@ def corr_chickenpox():
     import scipy.stats as stats
     import numpy as np
     import pandas as pd
-    df = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\NISPUF17.csv", index_col=0)
+    df = pd.read_csv(r"Doc\NISPUF17.csv", index_col=0)
     df = df[["HAD_CPOX","P_NUMVRC"]].dropna()
     df = df[df["HAD_CPOX"]<=2].dropna()
     corr, pval = stats.pearsonr(df["HAD_CPOX"],df["P_NUMVRC"])
     return corr
     raise NotImplementedError()
+orint(corr_chickenpox())
 assert -1<=corr_chickenpox()<=1, "You must return a float number between -1.0 and 1.0."
 
 

@@ -56,7 +56,7 @@ frame["debt"] = value
 print(frame)
 
 print("TwoA")
-frame['eastern'] = frame.state == 'Ohio' #create a new column
+frame['eastern'] = frame["state"] == 'Ohio' #create a new column
 print(frame)
 print(frame.loc[:, ["year", "state", "pop", "debt"]])
 del frame["eastern"]
