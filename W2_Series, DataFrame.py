@@ -51,7 +51,7 @@ data = {'state': ['Ohio', 'Ohio', 'Ohio', 'Nevada', 'Nevada', 'Nevada'],
         'year': [2000, 2001, 2002, 2001, 2002, 2003],
         'pop': [1.5, 1.7, 3.6, 2.4, 2.9, 3.2]}
 frame = pd.DataFrame(data, columns=["year", "state", "pop", "debt"]) #arrange column
-value = pd.Series ([-1.5, -2, -3], index = [0, 3, 4]) #assign list, array, series to DataFrame
+value = pd.Series([-1.5, -2, -3], index = [0, 3, 4]) #assign list, array, series to DataFrame
 frame["debt"] = value
 print(frame)
 
@@ -100,9 +100,9 @@ print(df_new.columns)
 
 #filter and missing values (boolean mask)
 criteria = df[df["Chance of Admit"]>0.7]    #include .where() & .dropna
-print(criteria)
+print(criteria.head())
 #and
-criteria = df["Chance of Admit"].gt(0.7).lt(0.9)    #0.7<x<0.9
+criteria = df["Chance of Admit"].gt(0.7) & df["Chance of Admit"].lt(0.9)    #0.7<x<0.9
 print(df.where(criteria).dropna().head())   #.dropna() removes entries outside 0.7< x <0.9
 
 
