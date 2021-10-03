@@ -58,6 +58,8 @@ assert len(average_influenza_doses())==2, "Return two values in a tuple, the fir
 # but were vaccinated against it (at least one varicella dose) versus those who were vaccinated but did not contract chicken pox. Return results by sex.
 # This function should return a dictionary in the form of (use the correct numbers)
 def chickenpox_by_sex():
+    import scipy.stats as stats
+    import numpy as np
     import pandas as pd
     df = pd.read_csv(r"Doc\NISPUF17.csv", index_col=0)
     df = df.loc[:,["HAD_CPOX", "P_NUMVRC", "SEX"]].dropna()
@@ -92,7 +94,7 @@ def corr_chickenpox():
     corr, pval = stats.pearsonr(df["HAD_CPOX"],df["P_NUMVRC"])
     return corr
     raise NotImplementedError()
-orint(corr_chickenpox())
+print(corr_chickenpox())
 assert -1<=corr_chickenpox()<=1, "You must return a float number between -1.0 and 1.0."
 
 
