@@ -1,15 +1,10 @@
-import pandas as pd
 import numpy as np
-pd.set_option('display.width', 400)
-pd.set_option('display.max_columns', 12)
+import pandas as pd
 
-df = pd.read_csv(r'C:\Users\user\PycharmProjects\UoM_C1\Doc\census.csv')
-def method_slow():
-    for state in df["STNAME"].unique():
-        avg = np.average(df[df["STNAME"]==state].dropna()["CENSUS2010POP"])
-        return("Counties in state " + state + " have an avg pop of " + str(avg))
-
-def method_fast():
-    for group, frame in df.groupby("STNAME"):
-        avg = np.average(frame["CENSUS2010POP"])
-        return("Counties in state " + state + " have an avg pop of " + str(avg))
+df= pd.read_csv("Doc/listings.csv")
+df.groupby("cancellation_policy").agg({"review_scores_value":np.average})   #doesn't work as np.avg doesn't ignore NaNs
+# First we're doing a group by on the dataframe object by the column "cancellation_policy"
+# Then we are invoking the agg() function on that object. The agg function is going to apply one or more
+# functions we specify to the group dataframes and return a single row per dataframe/group
+print(df.groupby("cancellation_policy").agg({"review_scores_value":(np.nanmean,np.nanstd),
+                                      "reviews_per_month":np.nanmean}))
