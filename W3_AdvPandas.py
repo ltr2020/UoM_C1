@@ -79,12 +79,12 @@ print("")
 
 print("TwoC - groupby() to split df into chunks to speed up")
 def method_slow():
-    for state in df["STNAME"].unique():
+    for  state in df["STNAME"].unique():
         avg = np.average(df[df["STNAME"]==state].dropna()["CENSUS2010POP"])
         return("Counties in state " + state + " have an avg pop of " + str(avg))
 
 def method_fast():
-    for group, frame in df.groupby("STNAME"):   ##pass a column to groupby(), o/w default index
+    for group, frame in df.groupby("STNAME"):   ##pass a column to groupby(), o/w index by default
         avg = np.average(frame["CENSUS2010POP"])
         return("Counties in state " + state + " have an avg pop of " + str(avg))
 print("")
@@ -112,8 +112,8 @@ print("Three Applications")
 print("3-1: .agg() of data")
 df=df.reset_index()
 df.groupby("cancellation_policy").agg({"review_scores_value":np.average})   #doesn't work as np.avg doesn't ignore NaNs
-# First we're doing a group by on the dataframe object by the column "cancellation_policy"
-# Then we are invoking the agg() function on that object. The agg function is going to apply one or more
+# First, groupby on the dataframe object by the column "cancellation_policy"
+# Then agg() function on that object. The agg function is going to apply one or more
 # functions we specify to the group dataframes and return a single value per column, so one row per grp
 print(df.groupby("cancellation_policy").agg({"review_scores_value":(np.nanmean,np.nanstd),
                                       "reviews_per_month":np.nanmean}))
@@ -142,10 +142,11 @@ df['mean_diff']=np.absolute(df['review_scores_value']-df['mean_review_scores'])
 print(df['mean_diff'].head())
 print("")
 
-print("Faster approach: .aaply()")
+print("Faster approach: .apply()")
 # In previous work we wanted to find the average review score of a listing and its deviation from the group
 # mean. This was a two step process, first we used transform() on the groupby object and then we had to
-# broadcast to create a new column. With apply() we could wrap this logic in one place
+# broadcast to create a new column
+# With apply() we could wrap this logic in one place
 def calc_mean_review_scores(group):
     # group is a dataframe just of whatever we have grouped by, e.g. cancellation policy, so we can treat
     # this as the complete dataframe
