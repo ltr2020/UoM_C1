@@ -46,7 +46,7 @@ print("")
 
 # Lets go back to our census data for an example. We saw that we could group by state, then aggregate to get a
 # list of the average county size by state. If we further apply cut to this with, say, ten bins, we can see
-# the states listed as categoricals using the average county size.
+# the states listed as categorical using the average county size.
 
 import numpy as np
 df = pd.read_csv("Doc/census.csv")
@@ -56,13 +56,12 @@ df = df.set_index('STNAME').groupby(level=0)['CENSUS2010POP'].agg(np.average)
 print(df.head())
 
 # Now if we just want to make "bins" of each of these, we can use cut()
-print(pd.cut(df,10))
+print(pd.cut(df,10).head())
 
 # Here we see that states like alabama and alaska fall into the same category, while california and the
 # district of columbia fall in a very different category.
 
-# Now, cutting is just one way to build categories from your data, and there are many other methods. For
-# instance, cut gives you interval data, where the spacing between each category is equal sized. But sometimes
-# you want to form categories based on frequency – you want the number of items in each bin to the be the
-# same, instead of the spacing between bins. It really depends on what the shape of your data is, and what
-# you’re planning to do with it.
+# Now, cutting is just one way to build categories from your dataFor
+# cut gives you interval data, spacing between each category is equal sized
+# But sometimes to form categories based on freq, no of items in each bin to be the same
+# It really depends on what the shape of your data is, and what you’re planning to do with it.
