@@ -55,7 +55,7 @@ df = df.set_index('STNAME').groupby(level=0)['CENSUS2010POP'].agg(np.average)
 
 print(df.head())
 
-# Now if we just want to make "bins" of each of these, we can use cut()
+# Now if we just want to make "bins" (categories i.e. think of intervals) of each of these, we can use cut()
 print(pd.cut(df,10).head())
 
 # Here we see that states like alabama and alaska fall into the same category, while california and the
