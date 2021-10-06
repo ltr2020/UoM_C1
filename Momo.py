@@ -1,79 +1,66 @@
 import pandas as pd
 import numpy as np
-df = pd.read_csv('Doc/cwurData.csv')
-print(df.head())
+# 4 main time related classes. Timestamp, DatetimeIndex, Period, and PeriodIndex
+
+# Timestamp is interchangeable with Python's datetime in most cases
+print("TIMESTAMP: single pt in time")
+day = pd.Timestamp('2019-9-1 10:05:08AM')
+#or
+print(pd.to_datetime('4/7/12', dayfirst=True))
+# or
+print(pd.Timestamp(2019, 9, 1, 10, 5, 8))
+# Timestamp also has some useful attributes, such as isoweekday(), which shows the weekday of the timestamp
+# note that 1 represents Monday and 7 represents Sunday
+print(pd.Timestamp(day).isoweekday())
+# You can find extract the specific year, month, day, hour, minute, second from a timestamp
+print(pd.Timestamp(day).second)
 print("")
 
-def create_category(ranking):
-    if (ranking >= 1) & (ranking <= 100):
-        return "First Tier Top Unversity"
-    elif (ranking >= 101) & (ranking <= 200):
-        return "Second Tier Top Unversity"
-    elif (ranking >= 201) & (ranking <= 300):
-        return "Third Tier Top Unversity"
-    return "Other Top Unversity"
-df['Rank_Level'] = df['world_rank'].apply(lambda x: create_category(x))
-print(df.head())
+print("PERIOD")
+print(pd.Period('1/2016') + 5)
+print(pd.Period('3/5/2016') - 2)
 print("")
 
-# A pivot table allows us to pivot out one of these columns a new column headers and compare it against
-# another column as row indices. Let's say we want to compare rank level versus country of the universities
-# and we want to compare in terms of overall score
-# aren't limited to one function that you might want to apply. aggfunc, a list of the different functions
-
-print(df.pivot_table(values='score', index='country', columns='Rank_Level', aggfunc=[np.mean, np.max]).head())
-# overall average for the country and max of the max-->  marginal values
-print("")
-print(df.pivot_table(values='score', index='country', columns='Rank_Level', aggfunc=[np.mean, np.max],
-                     margins=True).head())
-print("")
+print("Timedelta: diff in time")
+print(pd.Timestamp('9/3/2016')-pd.Timestamp('9/1/2016'))
+print(pd.Timestamp('9/2/2016 8:10AM') + pd.Timedelta('12D 3H'))
 print("")
 
-# A pivot table is just a multi-level dataframe, and we can access series or cells in the dataframe in a similar way
-# as we do so for a regular dataframe.
-# Let's create a new dataframe from our previous example
-new_df=df.pivot_table(values='score', index='country', columns='Rank_Level', aggfunc=[np.mean, np.max],
-               margins=True)
-# Now let's look at the index
-print(new_df.index)
-print("")
-# And let's look at the columns
-print(new_df.columns)
-# olumns are hierarchical. The top level column indices have two categories: mean and max,
-# the lower level column indices have four categories, which are the four rank levels
-
-# How would we query this if we want to get the average scores of First Tier Top Unversity levels in each country? We would just need
-# to make two dataframe projections, the first for the mean, then the second for the top tier
-print(new_df['mean']['First Tier Top Unversity'].head())
-# We can see that the output is a series object which we can confirm by printing the type. Remember that when
-# you project a single column of values out of a DataFrame you get a series.
-print(type(new_df['mean']['First Tier Top Unversity']))
-# find the country that has the maximum average score on First Tier Top University level?
-# use the idxmax() function
-print(new_df['mean']['First Tier Top Unversity'].idxmax())
-print("")
+print("Offset: similar to timedelta but fixed time intervals i.e. hr, day, biz day, end of mth, semi mth bgn, etc.")
+pd.Timestamp('9/4/2016').weekday()
+pd.Timestamp('9/4/2016') + pd.offsets.BusinessDay()
+pd.Timestamp('9/4/2016') + pd.offsets.MonthEnd()
 print("")
 
-# If you want to achieve a different shape of your pivot table, you can do so with the stack and unstack
-# functions. Stacking is pivoting the lowermost column index to become the innermost row index. Unstacking is
-# the inverse of stacking, pivoting the innermost row index to become the lowermost column index. An example
-# will help make this clear
+print("DatatimeIndex & PeriodIndex")
+t1 = pd.Series(list('abc'), [pd.Timestamp('2016-09-01'), pd.Timestamp('2016-09-02'),
+                             pd.Timestamp('2016-09-03')])
+print(t1)
+print(type(t1.index))
+t2 = pd.Series(list('def'), [pd.Period('2016-09'), pd.Period('2016-10'),
+                             pd.Period('2016-11')])
+print(t2)
+print(type(t2.index))
+print("")
 
-# Let's look at our pivot table first to refresh what it looks like
-print(new_df.head())
-# Now let's try stacking, this should move the lowermost column, so the tiers of the university rankings, to
-# the inner most row
-print("STACK")
-new_df=new_df.stack()
-print(new_df.head())
-# In the original pivot table, rank levels are the lowermost column, after stacking, rank levels become the
-# innermost index, appearing to the right after country
+print("Convert to Datetime")
+d1 = ['2 June 2013', 'Aug 29, 2014', '2015-06-26', '7/12/16']
+ts3 = pd.DataFrame(np.random.randint(10, 100, (4,2)), index=d1,
+                   columns=list('ab'))
+print(ts3)
+ts3.index = pd.to_datetime(ts3.index)
+print(ts3)
+print("")
 
-# Now let's try unstacking
-new_df.unstack().head()
-# That seems to restore our dataframe to its original shape. What do you think would happen if we unstacked twice in a row?
-print("UNSTACK")
-print(new_df.unstack().unstack().head())
-# We actually end up unstacking all the way to just a single column, so a series object is returned. This
-# column is just a "value", the meaning of which is denoted by the heirarachical index of operation, rank, and
-# country.
+print("Working with Dates in a Dataframe")
+dates = pd.date_range('10-01-2016', periods=9, freq='2W-SUN')
+print(dates)
+df = pd.DataFrame({'Count 1': 100 + np.random.randint(-5, 10, 9).cumsum(),
+                  'Count 2': 120 + np.random.randint(-5, 10, 9)}, index=dates)
+print(df)
+print(df.index.weekday)    #check what day for each date
+print(df.diff)  #diff of value(s) b/w each date
+print(df.resample('M').mean())  #want to know the mean value for each month (downsampling)
+print("")
+#slicing
+print(df.loc["2016-12"])
