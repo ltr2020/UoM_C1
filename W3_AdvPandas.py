@@ -167,7 +167,7 @@ print("3-3: filter of data")
 
 df.groupby('cancellation_policy').filter(lambda x: np.nanmean(x['review_scores_value'])>9.2)
 
-# Scaling
+print("SCALING")
 import numpy as np
 import pandas as pd
 
@@ -235,8 +235,7 @@ print(pd.cut(df,10).head())
 # But sometimes to form categories based on freq, no of items in each bin to be the same
 # It really depends on what the shape of your data is, and what you’re planning to do with it
 
-import pandas as pd
-import numpy as np
+print("PIVOT TABLE")
 df = pd.read_csv('Doc/cwurData.csv')
 print(df.head())
 print("")
