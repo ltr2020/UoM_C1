@@ -129,7 +129,7 @@ print(CG.head())
 print("")
 
 #Another example
-LOG = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\log.csv")  #no chan個--》missing values
+LOG = pd.read_csv(r"C:\Users\user\PycharmProjects\UoM_C1\Doc\log.csv")  #no change--》missing values
 print(LOG.head(10))
 LOG = LOG.set_index(["time", "user"]) #multi-level indexing
 LOG = LOG.sort_index()  #sort by index
