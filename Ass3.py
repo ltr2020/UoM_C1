@@ -1,5 +1,3 @@
-import pandas as pd
-import numpy as np
 
 print("Question 1")
 # Load assets/Energy Indicators.xls and put into a DataFrame with the variable name of Energy
@@ -34,7 +32,7 @@ print("Question 1")
 import pandas as pd
 import numpy as np
 pd.set_option('display.width', 400)
-pd.set_option('display.max_columns', 10)
+pd.set_option('display.max_columns', 20)
 
 def answer_one():
     Energy = pd.read_excel(r"Doc/Energy Indicators.xls",
@@ -206,7 +204,66 @@ print("Question 9")
 # This function should return a single number.
 # (Optional: Use the built-in function plot9() to visualize the relationship
 # between Energy Supply per Capita vs. Citable docs per Capita)
-top15 = answer_one()
-top15["Est_Pop"] = top15["Energy Supply"] / top15["Energy Supply per Capita"]
-top15["CiteDoc_per_capita"] = top15["Citable documents"] / top15["Est_Pop"]
-print(top15["CiteDoc_per_capita"].corr(top15["Energy Supply per Capita"]))
+def answer_nine():
+    top15 = answer_one()
+    top15["Est_Pop"] = top15["Energy Supply"] / top15["Energy Supply per Capita"]
+    top15["CiteDoc_per_capita"] = top15["Citable documents"] / top15["Est_Pop"]
+    return (top15["CiteDoc_per_capita"].corr(top15["Energy Supply per Capita"]))
+    raise NotImplementedError()
+print(answer_nine())
+assert answer_nine() >= -1. and answer_nine() <= 1., "Q9: A valid correlation should between -1 to 1!"
+
+def plot9():
+    import matplotlib.pyplot as plt
+    # %matplotlib inline in ipynb
+    Top15 = answer_one()
+    Top15['Est_Pop'] = Top15['Energy Supply'] / Top15['Energy Supply per Capita']
+    Top15['CiteDoc_per_capita'] = Top15['Citable documents'] / Top15['Est_Pop']
+    Top15.plot(x='CiteDoc_per_capita', y='Energy Supply per Capita', kind='scatter', xlim=[0, 0.0006])
+    return plt.show()
+print("")
+
+print("Question 10")
+# Create a new column with a 1 if the country's % Renewable value is at or above the median for all countries in the top 15,
+# and a 0 if the country's % Renewable value is below the median.
+# This function should return a series named
+# HighRenew whose index is the country name sorted in ascending order of rank.
+def answer_ten():
+    top15 = answer_one()
+    median_Re = top15["% Renewable"].median()
+    top15["HighRenew"] = top15["% Renewable"].apply(lambda x:0 if x < median_Re else 1)
+    # or top15["HighRenew"] = [0 if x < median_Re else 1 for x in top15["% Renewable"]]
+    return(top15["HighRenew"])
+    raise NotImplementedError()
+print(answer_ten())
+assert type(answer_ten()) == pd.Series, "Q10: You should return a Series!"
+print("")
+
+print("Question 11")
+# Use the following dictionary to group the Countries by Continent
+# then create a DataFrame that displays the sample size (the number of countries in each continent bin)
+# and the sum, mean, and std deviation for the estimated population of each country
+def answer_eleven():
+    ContinentDict = {'China': 'Asia',
+                     'United States': 'North America',
+                     'Japan': 'Asia',
+                     'United Kingdom': 'Europe',
+                     'Russian Federation': 'Europe',
+                     'Canada': 'North America',
+                     'Germany': 'Europe',
+                     'India': 'Asia',
+                     'France': 'Europe',
+                     'South Korea': 'Asia',
+                     'Italy': 'Europe',
+                     'Spain': 'Europe',
+                     'Iran': 'Asia',
+                     'Australia': 'Australia',
+                     'Brazil': 'South America'}
+    top15 = answer_one()
+    top15["Est_Pop"] = top15["Energy Supply"] / top15["Energy Supply per Capita"]
+    top15["Continent"] = pd.Series(ContinentDict)
+    return top15.groupby("Continent")["Est_Pop"].agg(Size=np.size,Sum= np.sum,Mean=np.mean,Std_dev=np.std)
+    # can't use dict inside of agg() old method
+
+
+print(answer_eleven())

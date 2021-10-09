@@ -116,7 +116,7 @@ df.groupby("cancellation_policy").agg({"review_scores_value":np.average})   #doe
 # Then agg() function on that object. The agg function is going to apply one or more
 # functions we specify to the group dataframes and return a single value per column, so one row per grp
 print(df.groupby("cancellation_policy").agg({"review_scores_value":(np.nanmean,np.nanstd),
-                                      "reviews_per_month":np.nanmean}))
+                                             "reviews_per_month":np.nanmean}))
 print("")
 print("3-2: .transform() of data")
 # unlike agg(), tranform() returns an object that is the same size as the group,
