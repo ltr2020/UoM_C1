@@ -79,7 +79,7 @@ print("")
 
 print("TwoC - groupby() to split df into chunks to speed up")
 def method_slow():
-    for  state in df["STNAME"].unique():
+    for state in df["STNAME"].unique():
         avg = np.average(df[df["STNAME"]==state].dropna()["CENSUS2010POP"])
         return("Counties in state " + state + " have an avg pop of " + str(avg))
 
