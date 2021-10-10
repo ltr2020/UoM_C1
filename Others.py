@@ -18,20 +18,22 @@ elif age >= 12:
 else:
     print("You're a child")
 
-#while loop
+# while loop
 i = 0
 while i < 5:
     print(i)
     i = i + 1
 
+
 def times_tables():
     lst = []
     for i in range(10):
-        for j in range (10):
-            lst.append(i*j)
+        for j in range(10):
+            lst.append(i * j)
     return lst
 
-#list
+
+# list
 names = ["Roy", "Helen", "Andy", "Kelly"]
 names[0] = "RL"
 names.insert(3, "David")
@@ -43,28 +45,27 @@ names.remove("David")
 print(names)
 print(len(names))
 
-#While loop
+# While loop
 i = 0
 while i < len(names):
     print(names[i])
-    i = i+1
+    i = i + 1
 
-#For Loops (easier with list)
+# For Loops (easier with list)
 for i in names:
     print(i)
 
-#Range & For Loops
-range = range(0, 10, 2) #excluding 10 see
+# Range & For Loops
+range = range(0, 10, 2)  # excluding 10 see
 for x in range:
     print(x)
 
-print(99//3)
-print(100%3)
+print(99 // 3)
+print(100 % 3)
 
 x = 10
 x = x + 8
-print (x)
+print(x)
 y = 10
 y += 8
 print(y)
-
