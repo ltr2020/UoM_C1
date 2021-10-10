@@ -53,14 +53,14 @@ print(ts3)
 print("")
 
 print("Working with Dates in a Dataframe")
-dates = pd.date_range('10-01-2016', periods=9, freq='2W-SUN')
+dates = pd.date_range('10-01-2021', periods=9, freq='2W-SUN')   #every 2 weeks Sunday
 print(dates)
 df = pd.DataFrame({'Count 1': 100 + np.random.randint(-5, 10, 9).cumsum(),
                   'Count 2': 120 + np.random.randint(-5, 10, 9)}, index=dates)
 print(df)
 print(df.index.weekday)    #check what day for each date
-print(df.diff)  #diff of value(s) b/w each date
-print(df.resample('M').mean())  #want to know the mean value for each month (downsampling)
+print(df.diff())  #diff of value(s) b/w each date
+print(df.resample('M').mean())  #mean value for each month (downsampling)
 print("")
 #slicing
-print(df.loc["2016-12"])
+print(df.loc["2021-12"])
