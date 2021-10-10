@@ -167,7 +167,7 @@ print("3-3: filter of data")
 
 df.groupby('cancellation_policy').filter(lambda x: np.nanmean(x['review_scores_value'])>9.2)
 
-print("SCALING")
+print("4: SCALING")
 import numpy as np
 import pandas as pd
 
@@ -234,7 +234,7 @@ print(pd.cut(df,10).head())
 # But sometimes to form categories based on freq, no of items in each bin to be the same
 # It really depends on what the shape of your data is, and what you’re planning to do with it
 
-print("PIVOT TABLE")
+print("5: PIVOT TABLE")
 df = pd.read_csv('Doc/cwurData.csv')
 print(df.head())
 print("")
@@ -261,7 +261,6 @@ print(df.pivot_table(values='score', index='country', columns='Rank_Level', aggf
 print("")
 print(df.pivot_table(values='score', index='country', columns='Rank_Level', aggfunc=[np.mean, np.max],
                      margins=True).head())
-print("")
 print("")
 
 # A pivot table is just a multi-level dataframe, and we can access series or cells in the dataframe in a similar way
