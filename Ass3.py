@@ -264,6 +264,74 @@ def answer_eleven():
     top15["Continent"] = pd.Series(ContinentDict)
     return top15.groupby("Continent")["Est_Pop"].agg(Size=np.size,Sum= np.sum,Mean=np.mean,Std_dev=np.std)
     # can't use dict inside of agg() old method
-
-
 print(answer_eleven())
+assert type(answer_eleven()) == pd.DataFrame, "Q11: You should return a DataFrame!"
+assert answer_eleven().shape[0] == 5, "Q11: Wrong row numbers!"
+assert answer_eleven().shape[1] == 4, "Q11: Wrong column numbers!"
+print("")
+
+print("Question 12")
+# Cut % Renewable into 5 bins
+# Group Top15 by the Continent, as well as these new % Renewable bins.
+# How many countries are in each of these groups?
+# This function should return a Series with a MultiIndex of Continent,
+# then the bins for % Renewable. Do not include groups with no countries.
+def answer_twelve():
+    ContinentDict = {'China': 'Asia',
+                     'United States': 'North America',
+                     'Japan': 'Asia',
+                     'United Kingdom': 'Europe',
+                     'Russian Federation': 'Europe',
+                     'Canada': 'North America',
+                     'Germany': 'Europe',
+                     'India': 'Asia',
+                     'France': 'Europe',
+                     'South Korea': 'Asia',
+                     'Italy': 'Europe',
+                     'Spain': 'Europe',
+                     'Iran': 'Asia',
+                     'Australia': 'Australia',
+                     'Brazil': 'South America'}
+    top15 = answer_one()
+    top15["Continent"] = pd.Series(ContinentDict)
+    top15["% Renewable"] = pd.cut(top15["% Renewable"],5)
+    top15["% Renewable"]
+    return top15.groupby(["Continent", "% Renewable"])["Continent"].agg(np.size).dropna()
+    raise NotImplementedError()
+print(answer_twelve())
+assert type(answer_twelve()) == pd.Series, "Q12: You should return a Series!"
+assert len(answer_twelve()) == 9, "Q12: Wrong result numbers!"
+print("")
+
+print("Question 13")
+# Convert the Population Estimate series to a string with thousands separator (using commas)
+# Use all significant digits (do not round the results).
+# e.g. 12345678.90 -> 12,345,678.90
+# This function should return a series PopEst whose index is the country name and whose values are the population estimate string
+
+def answer_thirteen():
+    top15 = answer_one()
+    top15['Est_Pop'] = top15['Energy Supply'] / top15['Energy Supply per Capita']
+    return top15['Est_Pop'].apply('{0:,}'.format).astype(str)
+    raise NotImplementedError()
+print(answer_thirteen())
+assert type(answer_thirteen()) == pd.Series, "Q13: You should return a Series!"
+assert len(answer_thirteen()) == 15, "Q13: Wrong result numbers!"
+print("")
+
+print("Optional")
+def plot_optional():
+    import matplotlib.pyplot as plt
+    top15 = answer_one()
+    ax = top15.plot(x='Rank', y='% Renewable', kind='scatter',
+                    c=['#e41a1c','#377eb8','#e41a1c','#4daf4a','#4daf4a','#377eb8','#4daf4a','#e41a1c',
+                       '#4daf4a','#e41a1c','#4daf4a','#4daf4a','#e41a1c','#dede00','#ff7f00'],
+                    xticks=range(1,16), s=6*top15['2014']/10**10, alpha=.75, figsize=[16,6]);
+
+    for i, txt in enumerate(top15.index):
+        ax.annotate(txt, [top15['Rank'][i], top15['% Renewable'][i]], ha='center')
+    return plt.show()
+print(plot_optional())
+print("This is an example of a visualization that can be created to help understand the data. \
+This is a bubble chart showing % Renewable vs. Rank. The size of the bubble corresponds to the countries' \
+2014 GDP, and the color corresponds to the continent.")
