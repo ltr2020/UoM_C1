@@ -221,7 +221,6 @@ import numpy as np
 df = pd.read_csv("Doc/census.csv")
 df = df[df['SUMLEV'] == 50]
 df = df.set_index('STNAME').groupby(level=0)['CENSUS2010POP'].agg(np.average)
-
 print(df.head())
 
 # Now if we just want to make "bins" (categories i.e. think of intervals) of each of these, we can use cut()
