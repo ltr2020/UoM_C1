@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import scipy.stats as stats
 import re
-pd.set_option('display.wSidth', 400)
+pd.set_option('display.width', 400)
 pd.set_option('display.max_columns', 20)
 nhl_df = pd.read_csv("Doc/nhl.csv")
 cities = pd.read_html("Doc/wikipedia_data.html")[1]
