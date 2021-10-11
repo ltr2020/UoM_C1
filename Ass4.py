@@ -10,8 +10,6 @@ pd.set_option('display.max_columns', 20)
 nhl_df = pd.read_csv("Doc/nhl.csv")
 cities = pd.read_html("Doc/wikipedia_data.html")[1]
 cities = cities.iloc[:-1, [0, 3, 5, 6, 7, 8]]
-print(nhl_df.head())
-print(cities.head())
 
 
 def nhl_correlation():
