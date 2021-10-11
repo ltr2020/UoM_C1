@@ -107,7 +107,6 @@ z = re.match('^it', text)  # only the first word
 print(z.span())
 a = re.split(",", text)
 print(a)
-
 pattern = re.compile(r'\s{1}')  # another method
 x = pattern.search('I don\'t know what \\s is')  # /s = space or tab
 print('\n', x.start())
@@ -116,10 +115,15 @@ print('\n', x.start())
 # "abc...$" check if 'end' with ...
 # "abc|cde" check either/or contain abc or cde
 # [\d]* = 0 or more instances of the preceding regex token, see ass_1
-# ?: Match expression but do not capture it.
-# ?= Match a suffix but exclude it from capture.
-# ?! = look ahead, Match if the suffix is absent
-# ?P<name> labels group as dictinary so that you can recall later with item.groupdict()
+# (?:) for non capturing group
+#       a(?:b) will match the "ab" in "abc", while a(?=b) will only match the "a" in "abc"
+# (?=) for positive look ahead.
+#       a(?=b) will match the "a" in "ab", but not the "a" in "ac"
+# (?!) for negative look ahead
+#       a(?!b) will match the "a" in "ac", but not the "a" in "ab".
+# (?<=) for positive look behind
+# (?<!) for negative look behind
+# (?P<name>) labels group as dictionary so that you can recall later with item.groupdict()
 # * to means zero or more times e.g.[\w]{1,100} = [\w]*
 # + = 1 or more
 # search() & match()  returns return individual match
