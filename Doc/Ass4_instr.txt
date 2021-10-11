@@ -1,0 +1,10 @@
+- read in a file of metropolitan regions and associated sports teams from assets/wikipedia_data.html
+- each of these regions may have one or more teams from the "Big 4": NFL (football, in assets/nfl.csv), MLB (baseball, in assets/mlb.csv), NBA (basketball, in assets/nba.csv or NHL (hockey, in assets/nhl.csv). Do not include data about the MLS or CFL
+- teams which are commonly known by a different area (e.g. "Oakland Raiders") need to be mapped into the metropolitan region given (e.g. San Francisco Bay Area)
+-require some human data understanding outside of the data you've been given (e.g. you will have to hand-code some names, and might need to google to find out where teams are)
+
+- For each sport I would like you to answer the question: what is the win/loss ratio's correlation with the population of the city it is in? i.e. to calculate the correlation with pearsonr
+-  so you are going to send in two ordered lists of values, the populations from the wikipedia_data.html file and the win/loss ratio for a given sport in the same order. 
+- Average the win/loss ratios for those cities which have multiple teams of a single sportmore teams than the assert statements test, remember to collapse multiple teams in one city into a single value!
+- Each sport is worth an equal amount in this assignment (20%*4=80%) of the grade for this assignment. You should only use data from year 2018 for your analysis 
+
