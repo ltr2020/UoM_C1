@@ -6,7 +6,7 @@ print("1: Basic Stats Testing")
 pd.set_option('display.width', 400)
 pd.set_option('display.max_columns', 20)
 df = pd.read_csv('Doc/grades.csv')
-print("There are {} rows and {} columns".format(df.shape[0], df.shape[1]))
+print("There are {df.shape[0]} rows and {df.shape[1]} columns")
 
 # segment this population into two pieces
 # Let's say those who finish the first assignment by the end of December 2015, we'll call them early finishers,
@@ -77,14 +77,11 @@ def test_columns(alpha=0.1):
             # And now we'll just print out if they are different and increment
             # the num_diff
             print(
-                "Col {} is statistically significantly different at alpha={}, pval={}".format(
-                    x,
-                    alpha,
-                    pval))
+                f"Col {x} is statistically significantly different at alpha={alpha}, pval={pval}"
+                    )
             num_diff += 1
     # and let's print out some summary stats
-    print("Total number different was {}, which is {}%".format(
-        num_diff, float(num_diff) / len(df1.columns) * 100))
+    print(f"Total number different was {num_diff}, which is {float(num_diff) / len(df1.columns) * 100}%")
 
 
 # And now lets actually run this

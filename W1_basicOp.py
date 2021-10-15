@@ -16,12 +16,12 @@ for i in sales_record:
     print(i)  # only show key
 for i in sales_record.items():  # return a tuple containing Key and Value
     print(i)
+print("")
 
 
 sales_statement = '{} bought {} item(s) at a price of {} each for a total of {}'
 
 print(
-    "\n",
     sales_statement.format(
         sales_record['person'],
         sales_record['num_items'],
