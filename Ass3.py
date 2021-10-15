@@ -1,6 +1,6 @@
-
 import numpy as np
 import pandas as pd
+
 print("Question 1")
 # Load assets/Energy Indicators.xls and put into a DataFrame with the variable name of Energy
 # make sure to exclude the footer and header information from the datafile
@@ -58,7 +58,7 @@ def answer_one():
         header=None,
         na_values=["..."])
 
-    Energy["Energy Supply"] = Energy["Energy Supply"] * 10**6
+    Energy["Energy Supply"] = Energy["Energy Supply"] * 10 ** 6
     Energy["Country"] = Energy["Country"].replace(
         to_replace=r"\d*", value="", regex=True)
     Energy["Country"] = Energy["Country"].replace(
@@ -112,6 +112,8 @@ assert answer_one().shape == (
 print("")
 
 print("Question 2")
+
+
 # When you joined the datasets, but before you reduced this to the top 15 items,
 # how many entries did you lose?
 
@@ -179,6 +181,8 @@ print(answer_two())
 print("")
 
 print("Question 3")
+
+
 # What are the top 15 countries for average GDP over the last 10 years?
 
 # return a Series named avgGDP with 15 countries
@@ -198,6 +202,8 @@ def answer_three():
 print(answer_three())
 
 print("Question 4")
+
+
 # By how much had the GDP changed over the 10 year span
 # for the country with the 6th largest average GDP?
 # This function should return a single number
@@ -218,6 +224,8 @@ print(answer_four())
 print("")
 
 print("Question 5")
+
+
 # What is the mean energy supply per capita?
 # This function should return a single number.
 
@@ -232,6 +240,8 @@ print(answer_five())
 print("")
 
 print("Question 6")
+
+
 # What country has the maximum % Renewable and what is the percentage?
 # This function should return a tuple with the name of the country and the
 # percentage.
@@ -240,16 +250,18 @@ print("Question 6")
 def answer_six():
     top15 = answer_one()
     top15_sortRe = top15["% Renewable"].sort_values(ascending=False)
-    return(top15_sortRe.index[0], top15_sortRe.max())
+    return (top15_sortRe.index[0], top15_sortRe.max())
 
 
 print(answer_six())
 assert isinstance(answer_six(), tuple), "Q6: You should return a tuple!"
 assert isinstance(answer_six()[
-                  0], str), "Q6: The first element in your result should be the name of the country!"
+    0], str), "Q6: The first element in your result should be the name of the country!"
 print("")
 
 print("Question 7")
+
+
 # Create a new column that is the ratio of Self-Citations to Total Citations
 # What is the maximum value for this new column, and what country has the highest ratio?
 # This function should return a tuple with the name of the country and the
@@ -266,7 +278,7 @@ def answer_seven():
 print(answer_seven())
 assert isinstance(answer_seven(), tuple), "Q7: You should return a tuple!"
 assert isinstance(answer_seven()[
-                  0], str), "Q7: The first element in your result should be the name of the country!"
+    0], str), "Q7: The first element in your result should be the name of the country!"
 print("")
 
 
@@ -283,6 +295,8 @@ print(answer_eight())
 print("")
 
 print("Question 9")
+
+
 # Create a column that estimates the number of citable documents per person.
 # What is the correlation between the number of citable documents per capita and the energy supply per capita?
 # Use the .corr() method, (Pearson's correlation).
@@ -326,6 +340,8 @@ def plot9():
 print("")
 
 print("Question 10")
+
+
 # Create a new column with a 1 if the country's % Renewable value is at or above the median for all countries in the top 15,
 # and a 0 if the country's % Renewable value is below the median.
 # This function should return a series named
@@ -339,7 +355,7 @@ def answer_ten():
         lambda x: 0 if x < median_Re else 1)
     # or top15["HighRenew"] = [0 if x < median_Re else 1 for x in top15["%
     # Renewable"]]
-    return(top15["HighRenew"])
+    return (top15["HighRenew"])
     raise NotImplementedError()
 
 
@@ -348,6 +364,8 @@ assert isinstance(answer_ten(), pd.Series), "Q10: You should return a Series!"
 print("")
 
 print("Question 11")
+
+
 # Use the following dictionary to group the Countries by Continent
 # then create a DataFrame that displays the sample size (the number of countries in each continent bin)
 # and the sum, mean, and std deviation for the estimated population of
@@ -377,8 +395,9 @@ def answer_eleven():
     return top15.groupby("Continent")["Est_Pop"].agg(
         Size=np.size, Sum=np.sum, Mean=np.mean, Std_dev=np.std)
 
-
     # can't use dict inside of agg() old method
+
+
 print(answer_eleven())
 assert isinstance(
     answer_eleven(), pd.DataFrame), "Q11: You should return a DataFrame!"
@@ -387,6 +406,8 @@ assert answer_eleven().shape[1] == 4, "Q11: Wrong column numbers!"
 print("")
 
 print("Question 12")
+
+
 # Cut % Renewable into 5 bins
 # Group Top15 by the Continent, as well as these new % Renewable bins.
 # How many countries are in each of these groups?
@@ -426,6 +447,8 @@ assert len(answer_twelve()) == 9, "Q12: Wrong result numbers!"
 print("")
 
 print("Question 13")
+
+
 # Convert the Population Estimate series to a string with thousands separator (using commas)
 # Use all significant digits (do not round the results).
 # e.g. 12345678.90 -> 12,345,678.90
@@ -473,7 +496,7 @@ def plot_optional():
                        '#ff7f00'],
                     xticks=range(1,
                                  16),
-                    s=6 * top15['2014'] / 10**10,
+                    s=6 * top15['2014'] / 10 ** 10,
                     alpha=.75,
                     figsize=[16,
                              6])
