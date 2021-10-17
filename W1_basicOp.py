@@ -98,7 +98,7 @@ print(delta)
 
 # Regex
 text = 'it is on me, or on someone else'
-x = re.findall('on', text)  # returns a list containing all matches
+x = re.findall('on', text) # returns a list containing all matches
 print(x)
 y = re.search('on', text)
 print(y)    # reMatch object, tells you boolean, location and matching word

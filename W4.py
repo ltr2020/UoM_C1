@@ -6,7 +6,7 @@ print("1: Basic Stats Testing")
 pd.set_option('display.width', 400)
 pd.set_option('display.max_columns', 20)
 df = pd.read_csv('Doc/grades.csv')
-print("There are {df.shape[0]} rows and {df.shape[1]} columns")
+print(f"There are {df.shape[0]} rows and {df.shape[1]} columns")
 
 # segment this population into two pieces
 # Let's say those who finish the first assignment by the end of December 2015, we'll call them early finishers,

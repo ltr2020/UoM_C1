@@ -1,11 +1,8 @@
+import pandas as pd
+import numpy as np
+import scipy.stats as stats
 import re
-def result():
-    s = 'ACAABAACAAABACDBADDDFSDDDFFSSSASDAFAAACBAAAFASD'
-    result = []
-    # compete the pattern below
-    pattern = "(\w)(?=[A]{3})"
-    for item in re.finditer(pattern, s):
-        # identify the group number below.
-        result.append(item.group())
-    return result
-print(result())
+
+nba_df = pd.read_csv("Doc/nba.csv")
+nba_df = nba_df[~nba_df.SRS.str.contains("Divsion")]
+
