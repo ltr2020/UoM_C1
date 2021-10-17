@@ -1,5 +1,4 @@
 from scipy.stats import ttest_ind
-from scipy import stats
 import pandas as pd
 import numpy as np
 print("1: Basic Stats Testing")
@@ -61,8 +60,8 @@ print("1-2: CI & Baysian Analysis")
 # One issue with p-values is that as you run more tests likely to get a value which
 # is statistically significant just by chance.
 # list comprehension to create 100x100 df, without it only 1x100
-df1 = pd.DataFrame([np.random.random(100) for x in range(100)])
-df2 = pd.DataFrame([np.random.random(100) for x in range(100)])
+df1 = pd.DataFrame([np.random.random(100) for i in range(100)])
+df2 = pd.DataFrame([np.random.random(100) for i in range(100)])
 
 
 def test_columns(alpha=0.1):
@@ -94,6 +93,6 @@ print("")
 # try alpha=5%
 test_columns(0.05)
 
-df2 = pd.DataFrame([np.random.chisquare(df=1, size=100) for x in range(100)])
+df2 = pd.DataFrame([np.random.chisquare(df=1, size=100) for i in range(100)])
 test_columns()
 print(df2.head())
