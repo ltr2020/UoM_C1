@@ -152,3 +152,11 @@ regex_email = re.compile(r"""
             \.                            # single Dot .
             ([a-z]{2,6})$                 # Top level Domain
              """, re.VERBOSE | re.IGNORECASE)
+
+print("Try Except") # to test block for errors
+try:
+  print(x)
+except NameError:
+  print("Variable x is not defined")
+except:
+  print("Something else went wrong")
