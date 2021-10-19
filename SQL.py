@@ -65,7 +65,7 @@ INSERT INTO <tablename> VALUES
 ("xx" , "XX", ...),    #first row
 ("xx", "XX", ...), ...    #2nd row
 
-UPDATE <Table>
+UPDATE <Table>  #change variable
 SET <Column = "xx">, ...
 WHERE <Predicate>
 
