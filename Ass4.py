@@ -5,12 +5,16 @@ import pandas as pd
 import numpy as np
 import scipy.stats as stats
 import re
+
 pd.set_option('display.width', 400)
 pd.set_option('display.max_columns', 20)
+
 nhl_df = pd.read_csv("Doc/nhl.csv")
 cities = pd.read_html("Doc/wikipedia_data.html")[1]
 cities = cities.iloc[:-1, [0, 3, 5, 6, 7, 8]]
+cities1 = cities.iloc[:, [0, 3, 5, 6, 7, 8]]
 
+print(cities == cities1)
 
 def nhl_correlation():
     # YOUR CODE HERE
