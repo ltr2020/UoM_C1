@@ -16,12 +16,12 @@ for i in sales_record:
     print(i)  # only show key
 for i in sales_record.items():  # return a tuple containing Key and Value
     print(i)
+print("")
 
 
 sales_statement = '{} bought {} item(s) at a price of {} each for a total of {}'
 
 print(
-    "\n",
     sales_statement.format(
         sales_record['person'],
         sales_record['num_items'],
@@ -100,7 +100,7 @@ print(delta)
 
 # Regex
 text = 'it is on me, or on someone else'
-x = re.findall('on', text)  # returns a list containing all matches
+x = re.findall('on', text) # returns a list containing all matches
 print(x)
 y = re.search('on', text)
 print(y)    # reMatch object, tells you boolean, location and matching word
@@ -154,3 +154,11 @@ regex_email = re.compile(r"""
             \.                            # single Dot .
             ([a-z]{2,6})$                 # Top level Domain
              """, re.VERBOSE | re.IGNORECASE)
+
+print("Try Except") # to test block for errors
+try:
+  print(x)
+except NameError:
+  print("Variable x is not defined")
+except:
+  print("Something else went wrong")

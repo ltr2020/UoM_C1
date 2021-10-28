@@ -105,7 +105,7 @@ print(df[["STNAME", "Country"]])
 del df["Country"]
 print("")
 
-print("TwoC - groupby() to split df into chunks to speed up")
+print("TwoC - groupby() to split df into sub dataframe to speed up")
 
 
 def method_slow():
@@ -157,7 +157,7 @@ df.groupby("cancellation_policy").agg({"review_scores_value": np.average})
 print(df.groupby("cancellation_policy").agg({"review_scores_value": (
     np.nanmean, np.nanstd), "reviews_per_month": np.nanmean}))
 print("")
-print("3-2: .transform() of data")
+print("3-2: .transform() of data") https://zhuanlan.zhihu.com/p/101284491
 # unlike agg(), tranform() returns an object that is the same size as the group,
 # returning a new dataframe. This makes combining data later easy
 # we want to include the average rating values in a given group by cancellation policy,
@@ -168,7 +168,6 @@ print("3-2: .transform() of data")
 cols = ['cancellation_policy', 'review_scores_value']
 # Now lets transform it, I'll store this in its own dataframe
 transform_df = df[cols].groupby('cancellation_policy').transform(np.nanmean)
-print(transform_df.head())
 # So we can see that the index here is actually the same as the original dataframe. So lets just join this
 # in. Before we do that, lets rename the column in the transformed version
 transform_df.rename(
