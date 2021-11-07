@@ -82,4 +82,4 @@ one_item = {'host': '146.204.224.152',
             'user_name': 'feest6811',
             'time': '21/Jun/2019:15:45:24 -0700',
             'request': b'POST /incentivize HTTP/1.1'}
-assert one_item in logs()
+
