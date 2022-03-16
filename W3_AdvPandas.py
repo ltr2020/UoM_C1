@@ -157,7 +157,7 @@ df.groupby("cancellation_policy").agg({"review_scores_value": np.average})
 print(df.groupby("cancellation_policy").agg({"review_scores_value": (
     np.nanmean, np.nanstd), "reviews_per_month": np.nanmean}))
 print("")
-print("3-2: .transform() of data") https://zhuanlan.zhihu.com/p/101284491
+print("3-2: transform() of data")# https://zhuanlan.zhihu.com/p/101284491
 # unlike agg(), tranform() returns an object that is the same size as the group,
 # returning a new dataframe. This makes combining data later easy
 # we want to include the average rating values in a given group by cancellation policy,
