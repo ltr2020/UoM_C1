@@ -30,7 +30,8 @@ print(
         sales_record['price']))
 
 # Class function
-
+# an outline for creating a new object. An object is anything that you wish to manipulate or change while working through the code.
+# Every time a class object is instantiated, which is when we declare a variable, a new object is initiated from scratch.
 
 class Account:
     def __init__(self, number, name):
@@ -41,7 +42,8 @@ class Account:
     def deposit(self, amount):  # 存款動作: amount代表存入金額
         if amount <= 0:
             raise ValueError('must be positive')
-        self.balance += amount
+        else:
+            self.balance += amount
 
     def withdraw(self, amount):  # 取款動作: amount代表取款金額
         if amount <= self.balance:
