@@ -312,7 +312,7 @@ def nba_df():
     _df['team'] = _df['team'].str.replace(r'\(\d*\)', "", regex=True)
     _df['team'] = _df['team'].str.replace(r'[\xa0]', "", regex=True)
     _df = _df[['team', 'W/L%']]
-    _df['team'] = _df['team'].str.replace('[\w.]* ', ''regex=True)
+    _df['team'] = _df['team'].str.replace('[\w.]*', "",regex=True)
     _df = _df.astype({'team': str, 'W/L%': float})
 
     merge = pd.merge(team, _df, 'outer', on='team')
@@ -404,12 +404,11 @@ def sports_team_performance():
     for i in sports:
         for j in sports:
             if i != j:
-                merge = pd.merge(create_df(i), create_df(j), 'inner', on=['Metropolitan area'])
+                merge = pd.merge(create_df(i), create_df(j), how='inner', on=['Metropolitan area'])
                 p_values.loc[i, j] = stats.ttest_rel(merge['W/L%_x'], merge['W/L%_y'])[1]
 
     assert abs(p_values.loc["NBA", "NHL"] - 0.02) <= 1e-2, "The NBA-NHL p-value should be around 0.02"
     assert abs(p_values.loc["MLB", "NFL"] - 0.80) <= 1e-2, "The MLB-NFL p-value should be around 0.80"
     return p_values
-
 
 print(sports_team_performance())
