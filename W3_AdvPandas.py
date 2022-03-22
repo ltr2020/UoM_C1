@@ -118,7 +118,7 @@ def method_fast():
     for group, frame in df.groupby(
             "STNAME"):  # pass a column to groupby(), o/w index by default
         avg = np.average(frame["CENSUS2010POP"])
-        return("Counties in state " + state + " have an avg pop of " + str(avg))
+        return("Counties in state " + group + " have an avg pop of " + str(avg))
 
 
 print("")
